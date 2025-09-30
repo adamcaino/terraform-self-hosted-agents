@@ -11,5 +11,5 @@ resource "azurerm_subnet" "compute" {
   name                 = "snet-compute-${local.resource_name_suffix}-01"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.cicd.name
-  address_prefixes     = [var.compute_subnet_address_prefix]
+  address_prefixes     = var.compute_subnet_address_prefixes
 }

@@ -12,7 +12,7 @@ module "avm_cicd_vnet" {
   subnets = {
     compute = {
       name                   = "snet-compute-${local.resource_name_suffix}-01" # A key of "compute" becomes "snet-compute-dev-uks-01"
-      address_prefixes       = [var.compute_subnet_address_prefix]
+      address_prefixes       = var.compute_subnet_address_prefixes
       network_security_group = { id = module.avm_compute_nsg.resource_id } # Associate the "compute" NSG  with the "compute" subnet
       nat_gateway            = { id = module.avm_nat_gateway.resource_id } # Associate the NAT Gateway  with the "compute" subnet
     }

@@ -23,8 +23,8 @@ variable "workload" {
     short_name = string
   })
   default = {
-    name       = "CICD Single Instance"
-    short_name = "cicd-si"
+    name       = "CICD Terraform"
+    short_name = "cicd-tf"
   }
 }
 
@@ -47,7 +47,7 @@ variable "location" {
 }
 
 # -- Network Security Group variables --
-variable "my_ip_address" {
+variable "user_ip_address" {
   description = "Your public IP address in CIDR notation."
   type        = string
 }
@@ -59,8 +59,8 @@ variable "vnet_address_space" {
   default     = ["192.168.0.0/16"]
 }
 
-variable "compute_subnet_address_prefix" {
-  description = "The address prefix for the compute subnet."
-  type        = string
-  default     = "192.168.0.0/24"
+variable "compute_subnet_address_prefixes" {
+  description = "The address space for the compute subnet."
+  type        = array(string)
+  default     = ["192.168.0.0/24"]
 }

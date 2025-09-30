@@ -23,8 +23,8 @@ variable "workload" {
     short_name = string
   })
   default = {
-    name       = "CICD Single Instance"
-    short_name = "cicd-si"
+    name       = "CICD Bicep"
+    short_name = "cicd-bicep"
   }
 }
 
@@ -59,8 +59,8 @@ variable "vnet_address_space" {
   default     = ["192.168.0.0/16"]
 }
 
-variable "compute_subnet_address_prefix" {
+variable "compute_subnet_address_prefixes" {
   description = "The address prefix for the compute subnet."
   type        = string
-  default     = "192.168.0.0/24"
+  default     = ["192.168.0.0/24"]
 }
