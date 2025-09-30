@@ -49,33 +49,33 @@ terraform apply plan.tfplan
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.46.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.1.0 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_avm_key_vault"></a> [avm\_key\_vault](#module\_avm\_key\_vault) | Azure/avm-res-keyvault-vault/azurerm | 0.10.1 |
+| <a name="module_avm_linux_pip"></a> [avm\_linux\_pip](#module\_avm\_linux\_pip) | Azure/avm-res-network-publicipaddress/azurerm | 0.2.0 |
+| <a name="module_avm_linux_vm"></a> [avm\_linux\_vm](#module\_avm\_linux\_vm) | Azure/avm-res-compute-virtualmachine/azurerm | 0.19.3 |
+| <a name="module_avm_rg"></a> [avm\_rg](#module\_avm\_rg) | Azure/avm-res-resources-resourcegroup/azurerm | 0.2.1 |
+| <a name="module_avm_ssh_public_key"></a> [avm\_ssh\_public\_key](#module\_avm\_ssh\_public\_key) | Azure/avm-res-compute-sshpublickey/azurerm | 0.1.0 |
+| <a name="module_avm_windows_pip"></a> [avm\_windows\_pip](#module\_avm\_windows\_pip) | Azure/avm-res-network-publicipaddress/azurerm | 0.2.0 |
+| <a name="module_avm_windows_vm"></a> [avm\_windows\_vm](#module\_avm\_windows\_vm) | Azure/avm-res-compute-virtualmachine/azurerm | 0.19.3 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault.kv](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
 | [azurerm_key_vault_access_policy.current_user](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.admin_password](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.admin_ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
-| [azurerm_linux_virtual_machine.cicd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine) | resource |
-| [azurerm_network_interface.linux](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface) | resource |
-| [azurerm_network_interface.windows](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface) | resource |
-| [azurerm_public_ip.linux](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
-| [azurerm_public_ip.windows](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
-| [azurerm_ssh_public_key.admin_ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ssh_public_key) | resource |
-| [azurerm_windows_virtual_machine.cicd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine) | resource |
-| [random_password.admin_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [random_password.admin](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [tls_private_key.admin_ssh_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
-| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.platform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_subnet.compute](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
@@ -83,13 +83,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | The admin username for the Virtual Machine. | `string` | `"azureadmin"` | no |
-| <a name="input_cicd_vnet_name"></a> [cicd\_vnet\_name](#input\_cicd\_vnet\_name) | The name of the CI/CD virtual network to use when looking up the existing virtual network. | `string` | `"vnet-qc-cicd-single-instance-dev-uks-01"` | no |
+| <a name="input_cicd_vnet_name"></a> [cicd\_vnet\_name](#input\_cicd\_vnet\_name) | The name of the CI/CD virtual network to use when looking up the existing virtual network. | `string` | `"vnet-qc-cicd-platform-dev-uks-01"` | no |
 | <a name="input_compute_subnet_name"></a> [compute\_subnet\_name](#input\_compute\_subnet\_name) | The name of the compute subnet to use when looking up the existing subnet. | `string` | `"snet-compute-dev-uks-01"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment for the deployment (e.g., dev, test, prod). | `string` | `"dev"` | no |
 | <a name="input_key_vault_ip_rules"></a> [key\_vault\_ip\_rules](#input\_key\_vault\_ip\_rules) | List of IP addresses or CIDR ranges that are allowed to access the Key Vault. | `list(string)` | `[]` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region to deploy resources into. | <pre>object({<br/>    name      = string<br/>    shortcode = string<br/>  })</pre> | <pre>{<br/>  "name": "UK South",<br/>  "shortcode": "uks"<br/>}</pre> | no |
-| <a name="input_org"></a> [org](#input\_org) | Configuration details for the organisation, to be used for naming and tags for all resources created. | <pre>object({<br/>    name   = string<br/>    prefix = string<br/>  })</pre> | <pre>{<br/>  "name": "Quadrivium Cloud",<br/>  "prefix": "qc"<br/>}</pre> | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to use when looking up the existing resource group. | `string` | `"rg-qc-cicd-single-instance-dev-uks-01"` | no |
+| <a name="input_platform_resource_group_name"></a> [platform\_resource\_group\_name](#input\_platform\_resource\_group\_name) | The name of the resource group to use when looking up the existing resource group. | `string` | `"rg-qc-cicd-platform-terraform-avm-dev-uks-01"` | no |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The Subscription ID which should be used to deploy resources in to. | `string` | n/a | yes |
 | <a name="input_user_ip_address"></a> [user\_ip\_address](#input\_user\_ip\_address) | Your public IP address in CIDR notation. | `string` | n/a | yes |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size) | The size of the Virtual Machine. | `string` | `"Standard_B2s"` | no |
