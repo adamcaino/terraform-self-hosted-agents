@@ -4,7 +4,7 @@ module "avm_key_vault" {
   version = "0.10.1"
 
   # Key Vault name must be globally unique and not greater than 24 characters
-  name                = replace("kv${local.short_name_prefix}${local.name_suffix}01", "-", "") # "kvqccicdtfavmdevuks01"
+  name                = replace("kv${local.short_name_prefix}${local.name_suffix}01", "-", "") # "kvcicdtfavmdevuks01"
   location            = var.location.name
   resource_group_name = module.avm_rg.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
