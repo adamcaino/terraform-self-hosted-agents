@@ -48,7 +48,7 @@ resource "azurerm_network_interface" "linux" {
 
 # Create a Linux virtual machine
 resource "azurerm_linux_virtual_machine" "cicd" {
-  name                = "vm-${var.org.prefix}-cicd-linux-${var.environment}-${var.location.shortcode}-01" # "vm-qc-cicd-dev-uks-01"
+  name                = "vm-${var.org.prefix}-cicd-linux-${var.environment}-${var.location.shortcode}-01" # "vm-qc-cicd-linux-dev-uks-01"
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
 

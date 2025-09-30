@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "compute" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = var.my_ip_address
+    source_address_prefix      = var.user_ip_address
     destination_address_prefix = azurerm_subnet.compute.address_prefixes[0]
     description                = "Allow SSH inbound traffic"
   }
@@ -28,7 +28,7 @@ resource "azurerm_network_security_group" "compute" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = var.my_ip_address
+    source_address_prefix      = var.user_ip_address
     destination_address_prefix = azurerm_subnet.compute.address_prefixes[0]
     description                = "Allow RDP inbound traffic"
   }
