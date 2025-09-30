@@ -70,7 +70,6 @@ terraform apply plan.tfplan
 | <a name="input_compute_subnet_address_prefixes"></a> [compute\_subnet\_address\_prefixes](#input\_compute\_subnet\_address\_prefixes) | The address prefix for the compute subnet. | `list(string)` | <pre>[<br/>  "192.168.0.0/24"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment for the deployment (e.g., dev, test, prod). | `string` | `"dev"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region to deploy resources into. | <pre>object({<br/>    name      = string<br/>    shortcode = string<br/>  })</pre> | <pre>{<br/>  "name": "UK South",<br/>  "shortcode": "uks"<br/>}</pre> | no |
-| <a name="input_org"></a> [org](#input\_org) | Configuration details for the organisation, to be used for naming and tags for all resources created. | <pre>object({<br/>    name   = string<br/>    prefix = string<br/>  })</pre> | <pre>{<br/>  "name": "Quadrivium Cloud",<br/>  "prefix": "qc"<br/>}</pre> | no |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The Subscription ID which should be used to deploy resources in to. | `string` | n/a | yes |
 | <a name="input_user_ip_address"></a> [user\_ip\_address](#input\_user\_ip\_address) | Your public IP address in CIDR notation. | `string` | n/a | yes |
 | <a name="input_vnet_address_space"></a> [vnet\_address\_space](#input\_vnet\_address\_space) | The address space for the virtual network. | `list(string)` | <pre>[<br/>  "192.168.0.0/16"<br/>]</pre> | no |
