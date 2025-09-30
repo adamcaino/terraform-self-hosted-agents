@@ -9,11 +9,9 @@ module "avm_ssh_public_key" {
   source  = "Azure/avm-res-compute-sshpublickey/azurerm"
   version = "0.1.0"
 
-  name                = replace("sshkey${local.name_prefix}linux${local.name_suffix}01", "-", "") # "sshkeyqccicdlinuxdevuks01"
-  resource_group_name = module.avm_rg.name
+  name                = replace("sshkey${local.resource_name_prefix}linux${local.resource_name_suffix}01", "-", "") # "sshkeyqccicdsingleinstancelinuxdevuks01"
+  resource_group_name = data.azurerm_resource_group.rg.name
   public_key          = tls_private_key.admin_ssh_key.public_key_openssh
-
-  depends_on = [module.avm_rg]
 }
 
 # Save the SSH private key in a Key Vault secret
@@ -26,25 +24,14 @@ resource "azurerm_key_vault_secret" "admin_ssh_key" {
   depends_on = [azurerm_key_vault_access_policy.current_user]
 }
 
-# Create a Public IP for the VM
-module "avm_linux_pip" {
-  source  = "Azure/avm-res-network-publicipaddress/azurerm"
-  version = "0.2.0"
-
-  name                = "pip-${local.name_prefix}-linux-${local.name_suffix}-01" # "pip-qc-cicd-linux-dev-uks-01"
-  location            = var.location.name
-  resource_group_name = module.avm_rg.name
-}
-
-# Create a Linux virtual machine
-
+# Create a Linux Virtual Machine Scale Set
 module "avm_linux_vm" {
   source  = "Azure/avm-res-compute-virtualmachine/azurerm"
   version = "0.19.3"
 
-  name                = "vm-${local.name_prefix}-linux-${local.name_suffix}-01" # "vm-qc-cicd-linux-dev-uks-01"
+  name                = "vm-${local.resource_name_prefix}-linux-${local.resource_name_suffix}-01" # "vm-qc-cicd-linux-dev-uks-01"
   location            = var.location.name
-  resource_group_name = module.avm_rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
 
   os_type                    = "Linux"
   sku_size                   = var.vm_size # "Standard_B2s"
@@ -53,7 +40,7 @@ module "avm_linux_vm" {
 
   network_interfaces = {
     nic0 = {
-      name = "nic-${local.name_prefix}-linux-${local.name_suffix}-01" # "nic-qc-cicd-linux-dev-uks-01"
+      name = "nic-${local.resource_name_prefix}-linux-${local.resource_name_suffix}-01" # "nic-qc-cicd-linux-dev-uks-01"
       ip_configurations = {
         ipconfig0 = {
           name                          = "ipconfig"

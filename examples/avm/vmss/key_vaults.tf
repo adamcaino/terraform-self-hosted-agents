@@ -4,13 +4,10 @@ module "avm_key_vault" {
   version = "0.10.1"
 
   # Key Vault name must be globally unique and not greater than 24 characters
-  name                = replace("kv${local.short_name_prefix}${local.name_suffix}01", "-", "") # "kvqccicdtfavmdevuks01"
+  name                = replace("kv${local.resource_short_name_base}01", "-", "") # "kvqccicdsidevuks01"
   location            = var.location.name
-  resource_group_name = module.avm_rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
-
-  purge_protection_enabled   = false
-  soft_delete_retention_days = 7
 
   legacy_access_policies_enabled = true # For production use, consider using RBAC to manage access to the Key Vault.
 

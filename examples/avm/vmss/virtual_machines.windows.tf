@@ -8,7 +8,7 @@ resource "random_password" "admin" {
 
 # Save the admin password in a Key Vault secret
 resource "azurerm_key_vault_secret" "admin_password" {
-  name         = "${var.workload.short_name}-vm-admin-password" # "cicd-si-vm-admin-password"
+  name         = "${var.workload.short_name}-vmss-admin-password" # "cicd-avm-admin-password"
   value        = random_password.admin.result
   key_vault_id = module.avm_key_vault.resource_id
 
@@ -16,25 +16,15 @@ resource "azurerm_key_vault_secret" "admin_password" {
   depends_on = [azurerm_key_vault_access_policy.current_user]
 }
 
-# Create a Public IP for the VM
-module "avm_windows_pip" {
-  source  = "Azure/avm-res-network-publicipaddress/azurerm"
-  version = "0.2.0"
-
-  name                = "pip-${local.name_prefix}-windows-${local.name_suffix}-01" # "pip-qc-cicd-windows-dev-uks-01"
-  location            = var.location.name
-  resource_group_name = module.avm_rg.name
-}
-
 # Create a windows virtual machine
 module "avm_windows_vm" {
   source  = "Azure/avm-res-compute-virtualmachine/azurerm"
   version = "0.19.3"
 
-  name                = "vm-${local.name_prefix}-windows-${local.name_suffix}-01" # "vm-qc-cicd-windows-dev-uks-01"
-  computer_name       = upper(replace("VM${var.workload.short_name}1", "-", ""))  # "VMCICDTFAVM1" (max 15 characters)
+  name                = "vm-${local.resource_name_prefix}-windows-${local.resource_name_suffix}-01"           # "vm-qc-cicd-windows-dev-uks-01"
+  computer_name       = upper(replace("VM${var.workload.short_name}${local.resource_name_suffix}1", "-", "")) # "VMCICDSIDEVUKS1"
   location            = var.location.name
-  resource_group_name = module.avm_rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
 
   os_type                    = "Windows"
   sku_size                   = var.vm_size # "Standard_B2s"
@@ -43,7 +33,7 @@ module "avm_windows_vm" {
 
   network_interfaces = {
     nic0 = {
-      name = "nic-${local.name_prefix}-windows-${local.name_suffix}-01" # "nic-qc-cicd-windows-dev-uks-01"
+      name = "nic-${local.resource_name_prefix}-windows-${local.resource_name_suffix}-01" # "nic-qc-cicd-windows-dev-uks-01"
       ip_configurations = {
         ipconfig0 = {
           name                          = "ipconfig"

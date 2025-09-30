@@ -16,16 +16,10 @@ variable "org" {
   }
 }
 
-variable "workload" {
-  description = "Configuration details for the workload being deployed."
-  type = object({
-    name       = string
-    short_name = string
-  })
-  default = {
-    name       = "CICD Bicep"
-    short_name = "cicd-bicep"
-  }
+variable "workload_name" {
+  description = "The name of the workload being deployed."
+  type        = string
+  default     = "CICD Platform"
 }
 
 variable "environment" {
@@ -61,6 +55,6 @@ variable "vnet_address_space" {
 
 variable "compute_subnet_address_prefixes" {
   description = "The address prefix for the compute subnet."
-  type        = string
+  type        = list(string)
   default     = ["192.168.0.0/24"]
 }

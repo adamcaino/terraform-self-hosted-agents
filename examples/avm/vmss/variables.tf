@@ -22,8 +22,8 @@ variable "workload" {
     short_name = string
   })
   default = {
-    name       = "CICD Single Instance"
-    short_name = "cicd-si"
+    name = "CICD Terraform AVM"
+    slug = "cicd-tf-avm"
   }
 }
 
@@ -47,16 +47,16 @@ variable "location" {
 
 # -- Existing resource references --
 # Hardcoded for simplicity in this example, but should be looked up programmatically in a production deployment
-variable "platform_resource_group_name" {
+variable "resource_group_name" {
   description = "The name of the resource group to use when looking up the existing resource group."
   type        = string
-  default     = "rg-qc-cicd-platform-terraform-avm-dev-uks-01"
+  default     = "rg-qc-cicd-tf-avm-dev-uks-01"
 }
 
 variable "cicd_vnet_name" {
   description = "The name of the CI/CD virtual network to use when looking up the existing virtual network."
   type        = string
-  default     = "vnet-qc-cicd-platform-dev-uks-01"
+  default     = "vnet-qc-cicd-tf-avm-dev-uks-01"
 }
 
 variable "compute_subnet_name" {

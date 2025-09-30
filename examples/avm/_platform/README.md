@@ -41,45 +41,40 @@ terraform apply plan.tfplan
 | Name | Version |
 |------|---------|
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.46.0 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_avm_cicd_rg"></a> [avm\_cicd\_rg](#module\_avm\_cicd\_rg) | Azure/avm-res-resources-resourcegroup/azurerm | 0.2.1 |
+| <a name="module_avm_cicd_vnet"></a> [avm\_cicd\_vnet](#module\_avm\_cicd\_vnet) | Azure/avm-res-network-virtualnetwork/azurerm | 0.11.0 |
+| <a name="module_avm_compute_nsg"></a> [avm\_compute\_nsg](#module\_avm\_compute\_nsg) | Azure/avm-res-network-networksecuritygroup/azurerm | 0.5.0 |
+| <a name="module_avm_nat_gateway"></a> [avm\_nat\_gateway](#module\_avm\_nat\_gateway) | Azure/avm-res-network-natgateway/azurerm | 0.2.1 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azurerm_nat_gateway.cicd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/nat_gateway) | resource |
-| [azurerm_nat_gateway_public_ip_association.nat_gateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/nat_gateway_public_ip_association) | resource |
-| [azurerm_network_security_group.compute](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
-| [azurerm_public_ip.nat_gateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
-| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
-| [azurerm_subnet.compute](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
-| [azurerm_subnet_nat_gateway_association.nat_gateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_nat_gateway_association) | resource |
-| [azurerm_subnet_network_security_group_association.cicd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
-| [azurerm_virtual_network.cicd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_compute_subnet_address_prefix"></a> [compute\_subnet\_address\_prefix](#input\_compute\_subnet\_address\_prefix) | The address prefix for the compute subnet. | `string` | `"192.168.0.0/24"` | no |
+| <a name="input_compute_subnet_address_prefixes"></a> [compute\_subnet\_address\_prefixes](#input\_compute\_subnet\_address\_prefixes) | The address prefix for the compute subnet. | `list(string)` | <pre>[<br/>  "192.168.0.0/24"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment for the deployment (e.g., dev, test, prod). | `string` | `"dev"` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region to deploy resources into. | <pre>object({<br/>    name      = string<br/>    shortcode = string<br/>  })</pre> | <pre>{<br/>  "name": "UK South",<br/>  "shortcode": "uks"<br/>}</pre> | no |
-| <a name="input_my_ip_address"></a> [my\_ip\_address](#input\_my\_ip\_address) | Your public IP address in CIDR notation. | `string` | n/a | yes |
 | <a name="input_org"></a> [org](#input\_org) | Configuration details for the organisation, to be used for naming and tags for all resources created. | <pre>object({<br/>    name   = string<br/>    prefix = string<br/>  })</pre> | <pre>{<br/>  "name": "Quadrivium Cloud",<br/>  "prefix": "qc"<br/>}</pre> | no |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The Subscription ID which should be used to deploy resources in to. | `string` | n/a | yes |
+| <a name="input_user_ip_address"></a> [user\_ip\_address](#input\_user\_ip\_address) | Your public IP address in CIDR notation. | `string` | n/a | yes |
 | <a name="input_vnet_address_space"></a> [vnet\_address\_space](#input\_vnet\_address\_space) | The address space for the virtual network. | `list(string)` | <pre>[<br/>  "192.168.0.0/16"<br/>]</pre> | no |
-| <a name="input_workload"></a> [workload](#input\_workload) | Configuration details for the workload being deployed. | <pre>object({<br/>    name       = string<br/>    short_name = string<br/>  })</pre> | <pre>{<br/>  "name": "CICD Single Instance",<br/>  "short_name": "cicd-si"<br/>}</pre> | no |
+| <a name="input_workload_name"></a> [workload\_name](#input\_workload\_name) | The name of the workload being deployed. | `string` | `"CICD Platform"` | no |
 
 ## Outputs
 
