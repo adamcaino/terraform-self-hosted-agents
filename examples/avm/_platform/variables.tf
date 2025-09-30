@@ -4,18 +4,6 @@ variable "subscription_id" {
   type        = string
 }
 
-variable "org" {
-  description = "Configuration details for the organisation, to be used for naming and tags for all resources created."
-  type = object({
-    name   = string
-    prefix = string
-  })
-  default = {
-    name   = "Quadrivium Cloud"
-    prefix = "qc"
-  }
-}
-
 variable "workload_name" {
   description = "The name of the workload being deployed."
   type        = string

@@ -9,7 +9,7 @@ module "avm_ssh_public_key" {
   source  = "Azure/avm-res-compute-sshpublickey/azurerm"
   version = "0.1.0"
 
-  name                = replace("sshkey${local.name_prefix}linux${local.name_suffix}01", "-", "") # "sshkeyqccicdlinuxdevuks01"
+  name                = replace("sshkey${local.name_prefix}linux${local.name_suffix}01", "-", "") # "sshkeycicdlinuxdevuks01"
   resource_group_name = module.avm_rg.name
   public_key          = tls_private_key.admin_ssh_key.public_key_openssh
 
@@ -31,7 +31,7 @@ module "avm_linux_pip" {
   source  = "Azure/avm-res-network-publicipaddress/azurerm"
   version = "0.2.0"
 
-  name                = "pip-${local.name_prefix}-linux-${local.name_suffix}-01" # "pip-qc-cicd-linux-dev-uks-01"
+  name                = "pip-${local.name_prefix}-linux-${local.name_suffix}-01" # "pip-cicd-linux-dev-uks-01"
   location            = var.location.name
   resource_group_name = module.avm_rg.name
 }
@@ -42,7 +42,7 @@ module "avm_linux_vm" {
   source  = "Azure/avm-res-compute-virtualmachine/azurerm"
   version = "0.19.3"
 
-  name                = "vm-${local.name_prefix}-linux-${local.name_suffix}-01" # "vm-qc-cicd-linux-dev-uks-01"
+  name                = "vm-${local.name_prefix}-linux-${local.name_suffix}-01" # "vm-cicd-linux-dev-uks-01"
   location            = var.location.name
   resource_group_name = module.avm_rg.name
 
@@ -53,7 +53,7 @@ module "avm_linux_vm" {
 
   network_interfaces = {
     nic0 = {
-      name = "nic-${local.name_prefix}-linux-${local.name_suffix}-01" # "nic-qc-cicd-linux-dev-uks-01"
+      name = "nic-${local.name_prefix}-linux-${local.name_suffix}-01" # "nic-cicd-linux-dev-uks-01"
       ip_configurations = {
         ipconfig0 = {
           name                          = "ipconfig"

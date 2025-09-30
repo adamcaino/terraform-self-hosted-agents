@@ -3,7 +3,7 @@ module "avm_cicd_vnet" {
   source  = "Azure/avm-res-network-virtualnetwork/azurerm"
   version = "0.11.0"
 
-  name          = "vnet-${local.name_prefix}-${local.name_suffix}-01" # "vnet-qc-cicd-platform-dev-uks-01"
+  name          = "vnet-${local.name_prefix}-${local.name_suffix}-01" # "vnet-cicd-platform-dev-uks-01"
   parent_id     = module.avm_cicd_rg.resource_id                      # The resource ID of the resource group to create the VNet in
   location      = var.location.name                                   # Location for the VNet, typically the same as the resource group its deployed in
   address_space = var.vnet_address_space                              # The address space for the VNet

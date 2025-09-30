@@ -21,7 +21,7 @@ module "avm_windows_pip" {
   source  = "Azure/avm-res-network-publicipaddress/azurerm"
   version = "0.2.0"
 
-  name                = "pip-${local.name_prefix}-windows-${local.name_suffix}-01" # "pip-qc-cicd-windows-dev-uks-01"
+  name                = "pip-${local.name_prefix}-windows-${local.name_suffix}-01" # "pip-cicd-windows-dev-uks-01"
   location            = var.location.name
   resource_group_name = module.avm_rg.name
 }
@@ -31,7 +31,7 @@ module "avm_windows_vm" {
   source  = "Azure/avm-res-compute-virtualmachine/azurerm"
   version = "0.19.3"
 
-  name                = "vm-${local.name_prefix}-windows-${local.name_suffix}-01" # "vm-qc-cicd-windows-dev-uks-01"
+  name                = "vm-${local.name_prefix}-windows-${local.name_suffix}-01" # "vm-cicd-windows-dev-uks-01"
   computer_name       = upper(replace("VM${var.workload.short_name}1", "-", ""))  # "VMCICDTFAVM1" (max 15 characters)
   location            = var.location.name
   resource_group_name = module.avm_rg.name
@@ -43,7 +43,7 @@ module "avm_windows_vm" {
 
   network_interfaces = {
     nic0 = {
-      name = "nic-${local.name_prefix}-windows-${local.name_suffix}-01" # "nic-qc-cicd-windows-dev-uks-01"
+      name = "nic-${local.name_prefix}-windows-${local.name_suffix}-01" # "nic-cicd-windows-dev-uks-01"
       ip_configurations = {
         ipconfig0 = {
           name                          = "ipconfig"

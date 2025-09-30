@@ -3,7 +3,7 @@ module "avm_compute_nsg" {
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version = "0.5.0"
 
-  name                = "nsg-${local.name_prefix}-compute-${local.name_suffix}-01" # "nsg-qc-cicd-platform-compute-dev-uks-01"
+  name                = "nsg-${local.name_prefix}-compute-${local.name_suffix}-01" # "nsg-cicd-platform-compute-dev-uks-01"
   location            = var.location.name
   resource_group_name = module.avm_cicd_rg.name
 
