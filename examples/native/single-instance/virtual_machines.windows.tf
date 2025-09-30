@@ -40,7 +40,7 @@ resource "azurerm_network_interface" "windows" {
 
 # Create a Windows virtual machine
 resource "azurerm_windows_virtual_machine" "cicd" {
-  name                = "vm-${local.resource_name_prefix}-windows-${local.resource_name_suffix}-01"           # "vm-qc-cicd-dev-uks-01"
+  name                = "vm-${local.resource_name_prefix}-windows-${local.resource_name_suffix}-01"           # "vm-qc-cicd-windows-dev-uks-01"
   computer_name       = upper(replace("VM${var.workload.short_name}${local.resource_name_suffix}1", "-", "")) # "VMCICDSIDEVUKS1"
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name

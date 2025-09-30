@@ -22,8 +22,8 @@ variable "workload" {
     short_name = string
   })
   default = {
-    name       = "CICD Single Instance"
-    short_name = "cicd-si"
+    name       = "CICD Bicep"
+    short_name = "cicd-bicep"
   }
 }
 
@@ -46,16 +46,17 @@ variable "location" {
 }
 
 # -- Existing resource references --
+# Hardcoded for simplicity in this example, but should be looked up programmatically in a production deployment
 variable "resource_group_name" {
   description = "The name of the resource group to use when looking up the existing resource group."
   type        = string
-  default     = "rg-qc-cicd-single-instance-dev-uks-01"
+  default     = "rg-qc-cicd-bicep-dev-uks-01"
 }
 
 variable "cicd_vnet_name" {
   description = "The name of the CI/CD virtual network to use when looking up the existing virtual network."
   type        = string
-  default     = "vnet-qc-cicd-single-instance-dev-uks-01"
+  default     = "vnet-qc-cicd-bicep-dev-uks-01"
 }
 
 variable "compute_subnet_name" {

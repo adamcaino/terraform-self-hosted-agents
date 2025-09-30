@@ -11,7 +11,9 @@ terraform {
 provider "azurerm" {
   features {
     key_vault {
-      purge_soft_delete_on_destroy = true # Permanently delete Key Vault when the resource is destroyed. Used for testing purposes only.
+      # This setting allows Key Vaults to be destroyed even if they contain soft-deleted secrets
+      # Note: Use with caution in production environments
+      purge_soft_delete_on_destroy = true
     }
   }
 
